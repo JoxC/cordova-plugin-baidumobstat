@@ -40,3 +40,8 @@
         BaiduMobStat.onEvent('jquery_ready', '页面已加载'); 
     })
 ```
+
+## proguard配置
+
+`-keep class com.baidu.mobstat.** { *; }
+-keep class com.baidu.bottom.** { *; }`
