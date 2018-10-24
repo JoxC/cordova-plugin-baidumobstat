@@ -69,6 +69,6 @@
         <framework src="UIKit.framework" />
         <framework src="Foundation.framework" />
         <framework src="libz.1.2.5.tbd" />
-        <framework src="libstdc++.tbd" />
+        <framework src="libc++.tbd" />
     </platform>
 </plugin>
