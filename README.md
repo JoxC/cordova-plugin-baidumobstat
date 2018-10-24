@@ -43,5 +43,7 @@
 
 ## proguard配置
 
-`-keep class com.baidu.mobstat.** { *; }
--keep class com.baidu.bottom.** { *; }`
+```
+    -keep class com.baidu.mobstat.** { *; }
+    -keep class com.baidu.bottom.** { *; }
+```
