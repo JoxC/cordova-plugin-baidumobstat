@@ -11,13 +11,14 @@
         <clobbers target="BaiduMobStat"/>
     </js-module>
 
-
+    <dependency id="cordova-plugin-cocoapod-support"/>
 
     <platform name="android">
         <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
         <config-file target="config.xml" parent="/*">
             <feature name="BaiduMobStat">
                 <param name="android-package" value="com.baidu.mobstat.BaiduMobStat"/>
+                <param name="onload" value="true" />
             </feature>
         </config-file>
 
@@ -48,17 +49,19 @@
         <source-file src="src/android/BaiduMobStat.java" target-dir="src/com/baidu/mobstat"/>
     </platform>
     <platform name="ios">
+        <pod name="BaiduMobStatCodeless" />
         <config-file target="config.xml" parent="/*">
             <feature name="BaiduMobStat">
                 <param name="ios-package" value="CDVBaiduMobStat"/>
+                <param name="onload" value="true" />
             </feature>
             <preference name="appkey" value="$IOS_APPKEY"/>
         </config-file>
 
         <header-file src="src/ios/CDVBaiduMobStat.h"/>
         <source-file src="src/ios/CDVBaiduMobStat.m"/>
-        <header-file src="src/ios/lib/BaiduMobStat.h" framework="true" />
-        <source-file src="src/ios/lib/libBaiduMobStat.a" framework="true" />
+        <!--header-file src="src/ios/lib/BaiduMobStat.h" framework="true" />
+        <source-file src="src/ios/lib/libBaiduMobStat.a" framework="true" /-->
 
         <framework src="JavaScriptCore.framework" />
         <framework src="Security.framework" />
@@ -70,5 +73,12 @@
         <framework src="Foundation.framework" />
         <framework src="libz.1.2.5.tbd" />
         <framework src="libc++.tbd" />
+        <!-- 选择在代码中手动设置appkey -->
+        <!-- config-file target="*-Info.plist" parent="mtj_appkey">
+            <string>$IOS_APPKEY</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="mtj_debuglog">
+            <string>1</string>
+        </config-file -->
     </platform>
 </plugin>

@@ -5,7 +5,9 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,8 +16,23 @@ import android.text.TextUtils;
 public class BaiduMobStat extends CordovaPlugin {
 
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-        command(action, args, callbackContext);
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        // your init code here
+        StatService.setDebugOn(false);
+        // 获取测试设备ID
+        String testDeviceId = StatService.getTestDeviceId(cordova.getActivity().getApplicationContext());
+        // 日志输出
+        android.util.Log.d("BaiduMobStat", "Test DeviceId : " + testDeviceId);
+    }
+    
+    @Override
+    public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                command(action, args, callbackContext);
+            }
+        });
         return true;
     }
 
